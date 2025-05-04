@@ -1,4 +1,3 @@
-// pages/index.tsx
 import React from 'react';
 import BinaryTreeVisualizer from '../components/BinaryTreeVisualizer';
 import Head from 'next/head';

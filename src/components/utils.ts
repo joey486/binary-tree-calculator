@@ -43,6 +43,9 @@ export const parseTreeFromInput = (input: string): TreeNodeData | null => {
       node.left = parseNode(leftStr);
       node.right = parseNode(rightStr);
     }
+    else{
+      node.left = parseNode(content.trim());
+    }
 
     return node;
   };
