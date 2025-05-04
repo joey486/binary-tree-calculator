@@ -1,4 +1,4 @@
-import { TreeNodeData, TreeNode } from "./types";
+import { TreeNodeData, TreeNode, Edge } from "./types";
 
 export const parseTreeFromInput = (input: string): TreeNodeData | null => {
   if (!input) return null;
@@ -14,6 +14,7 @@ export const parseTreeFromInput = (input: string): TreeNodeData | null => {
       value: parseInt(valueMatch[1]),
       left: null,
       right: null,
+      edges: [], // Initialize edges as an empty array
     };
 
     // Find content between parentheses
@@ -42,9 +43,27 @@ export const parseTreeFromInput = (input: string): TreeNodeData | null => {
 
       node.left = parseNode(leftStr);
       node.right = parseNode(rightStr);
+
+      const edge1 : Edge = {
+        source: node,
+        target: node.left ,
+        type: "left",
+      };
+      const edge2 : Edge = {
+        source: node,
+        target: node.right ,
+        type: "right",
+      };
+      node.edges.push(edge1, edge2); 
     }
     else{
       node.left = parseNode(content.trim());
+      const edge1 : Edge = {
+        source: node,
+        target: node.left ,
+        type: "left",
+      };
+      node.edges.push(edge1);
     }
 
     return node;
