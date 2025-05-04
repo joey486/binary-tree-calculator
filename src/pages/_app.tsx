@@ -9,7 +9,7 @@ const roboto = Roboto({
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <div className={roboto.className} style={{ width: '100%', maxWidth: '100vw', height: '100%', overflow: 'hidden' }}>
+    <div className={roboto.className} style={{ width: '100%', height: '100%', overflow: 'scroll' }}>
       <Component {...pageProps} />
     </div>
   )

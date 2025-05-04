@@ -1,5 +1,5 @@
 import React from 'react';
-import { AddChildFormData } from './types';
+import { AddChildFormData } from './utils/types';
 
 interface AddChildFormProps {
   addChildForm: AddChildFormData | null;

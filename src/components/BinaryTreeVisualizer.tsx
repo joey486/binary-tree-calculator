@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTreeState } from './useTreeState';
+import { useTreeState } from './utils/useTreeState';
 import TreeInputForm from './TreeInputForm';
 import TreeDisplay from './TreeDisplay';
 import AddChildForm from './AddChildForm';
@@ -36,7 +36,6 @@ const BinaryTreeVisualizer: React.FC = () => {
         position: 'relative',
       }}
     >
-      <h2>Binary Tree Visualization</h2>
       <TreeInputForm
         treeInput={treeInput}
         setTreeInput={setTreeInput}

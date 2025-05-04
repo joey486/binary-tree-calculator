@@ -1,11 +1,12 @@
 import React from 'react';
-import { TreeNodeData } from './types';
+import { TreeNodeData } from './utils/types';
+import styles from '../styles/TreeInputForm.module.css'; // Changed to CSS module import
 
 interface TreeInputFormProps {
   treeInput: string;
   setTreeInput: (value: string) => void;
   error: string;
-  rootNode: TreeNodeData | null; // TreeNodeData | null (avoid import cycle or specify minimal type)
+  rootNode: TreeNodeData | null;
   handleCreateTree: () => void;
   handleClearTree: () => void;
 }
@@ -19,75 +20,49 @@ const TreeInputForm: React.FC<TreeInputFormProps> = ({
   handleClearTree,
 }) => {
   return (
-    <div
-      className="tree-input"
-      style={{
-        marginBottom: '20px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        width: '100%',
-        maxWidth: '500px',
-      }}
-    >
+    <div className={styles.treeInputContainer}>
       <textarea
+        className={styles.treeInputTextarea}
         value={treeInput}
-        onChange={(e) => setTreeInput(e.target.value) }
+        onChange={(e) => setTreeInput(e.target.value)}
         placeholder="Enter tree in format: 10(5(3,7),15(12,18))"
-        style={{
-          width: '100%',
-          marginBottom: '10px',
-          padding: '10px',
-          minHeight: '100px',
-        }}
+        aria-label="Tree structure input"
       />
+      
       {error && (
-        <div
-          style={{
-            color: 'red',
-            marginBottom: '10px',
-          }}
-        >
+        <div className={styles.treeInputError} role="alert">
           {error}
         </div>
       )}
-      <div
-        className="button-container"
-        style={{
-          display: 'flex',
-          gap: '10px',
-          width: '100%',
-          justifyContent: 'center',
-        }}
-      >
-        <button
+      
+      <div className={styles.treeInputButtons}>
+        <button 
+          className={`${styles.btn} ${styles.btnPrimary}`}
           onClick={handleCreateTree}
-          style={{
-            padding: '10px 20px',
-            backgroundColor: '#007bff',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: 'pointer',
-          }}
+          disabled={!treeInput.trim()}
         >
           Create Tree
         </button>
+        
         {rootNode && (
-          <button
+          <button 
+            className={`${styles.btn} ${styles.btnDanger}`}
             onClick={handleClearTree}
-            style={{
-              padding: '10px 20px',
-              backgroundColor: '#dc3545',
-              color: 'white',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer',
-            }}
           >
             Clear Tree
           </button>
         )}
+      </div>
+      
+      <div className={styles.treeInputHelp}>
+        <details>
+          <summary>Input Format Help</summary>
+          <ul>
+            <li><code>10</code> - Creates a root node with value 10</li>
+            <li><code>10(5,15)</code> - Root node 10 with left child 5 and right child 15</li>
+            <li><code>10(5(3,7),15)</code> - Nested structure with additional children</li>
+          </ul>
+        </details>
       </div>
     </div>
   );

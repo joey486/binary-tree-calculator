@@ -1,6 +1,6 @@
 import React from 'react';
-import TreeNode from './TreeNode'; // Adjust path based on your structure
-import { TreeNodeData } from './types';
+import TreeNode from './utils/TreeNode'; // Adjust path based on your structure
+import { TreeNodeData } from './utils/types';
 
 interface TreeDisplayProps {
   rootNode: TreeNodeData | null;
